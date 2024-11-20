@@ -1,0 +1,154 @@
+<section class="flex gap-6 pt-12">
+
+  <!-- Thanh filter bên trái -->
+  <div class="w-1/4 p-6 bg-gray-800 rounded-lg shadow-lg border-white">
+    <h3 class="text-white text-2xl mb-6 font-semibold border-b-2 border-gray-600 pb-3">Filters</h3>
+
+    <!-- Bộ lọc Giới tính -->
+    <form action="/shopping" method="GET">
+      <div class="mb-6">
+        <h4 class="text-white text-lg mb-2">Gender</h4>
+        <div class="flex flex-col gap-2">
+          <label class="text-white flex items-center">
+            <input type="checkbox" class="mr-2" name="gender" value="MEN" <%= gender === 'MEN' ? 'checked' : '' %>> Men
+          </label>
+          <label class="text-white flex items-center">
+            <input type="checkbox" class="mr-2" name="gender" value="WOMEN" <%= gender === 'WOMEN' ? 'checked' : '' %>> Women
+          </label>
+          <label class="text-white flex items-center">
+            <input type="checkbox" class="mr-2" name="gender" value="KIDS" <%= gender === 'KIDS' ? 'checked' : '' %>> Kids
+          </label>
+        </div>
+      </div>
+
+      <!-- Bộ lọc Size -->
+      <div class="mb-6">
+        <h4 class="text-white text-lg mb-2">Size</h4>
+        <div class="flex flex-col gap-2">
+          <label class="text-white flex items-center">
+            <input type="checkbox" class="mr-2" name="size" value="40" <%= size && size.includes('40') ? 'checked' : '' %>> 40
+          </label>
+          <label class="text-white flex items-center">
+            <input type="checkbox" class="mr-2" name="size" value="41" <%= size && size.includes('41') ? 'checked' : '' %>> 41
+          </label>
+          <label class="text-white flex items-center">
+            <input type="checkbox" class="mr-2" name="size" value="42" <%= size && size.includes('42') ? 'checked' : '' %>> 42
+          </label>
+          <label class="text-white flex items-center">
+            <input type="checkbox" class="mr-2" name="size" value="43" <%= size && size.includes('43') ? 'checked' : '' %>> 43
+          </label>
+          <label class="text-white flex items-center">
+            <input type="checkbox" class="mr-2" name="size" value="44" <%= size && size.includes('44') ? 'checked' : '' %>> 44
+          </label>
+          <label class="text-white flex items-center">
+            <input type="checkbox" class="mr-2" name="size" value="45" <%= size && size.includes('45') ? 'checked' : '' %>> 45
+          </label>
+        </div>
+      </div>
+
+      <!-- Bộ lọc Danh mục -->
+      <div class="mb-6">
+        <h4 class="text-white text-lg mb-2">Category</h4>
+        <div class="flex flex-col gap-2">
+          <label class="text-white flex items-center">
+            <input type="checkbox" class="mr-2" name="category" value="Running" <%= category === 'Running' ? 'checked' : '' %>> Running
+          </label>
+          <label class="text-white flex items-center">
+<input type="checkbox" class="mr-2" name="category" value="Basketball" <%= category === 'Basketball' ? 'checked' : '' %>> Basketball
+          </label>
+          <label class="text-white flex items-center">
+            <input type="checkbox" class="mr-2" name="category" value="Lifestyle" <%= category === 'Lifestyle' ? 'checked' : '' %>> Lifestyle
+          </label>
+          <label class="text-white flex items-center">
+            <input type="checkbox" class="mr-2" name="category" value="Soccer" <%= category === 'Soccer' ? 'checked' : '' %>> Soccer
+          </label>
+        </div>
+      </div>
+
+      <!-- Bộ lọc Giá -->
+      <div class="mb-6">
+        <h4 class="text-white text-lg mb-2">Price</h4>
+        <div class="flex flex-col gap-2">
+          <label class="text-white flex items-center">
+            <input type="checkbox" class="mr-2" name="price" value="under100" <%= price === 'under100' ? 'checked' : '' %>> Under $100
+          </label>
+          <label class="text-white flex items-center">
+            <input type="checkbox" class="mr-2" name="price" value="100to200" <%= price === '100to200' ? 'checked' : '' %>> $100 - $200
+          </label>
+          <label class="text-white flex items-center">
+            <input type="checkbox" class="mr-2" name="price" value="200to300" <%= price === '200to300' ? 'checked' : '' %>> $200 - $300
+          </label>
+          <label class="text-white flex items-center">
+            <input type="checkbox" class="mr-2" name="price" value="over300" <%= price === 'over300' ? 'checked' : '' %>> Over $300
+          </label>
+        </div>
+      </div>
+
+      <!-- Submit filter -->
+      <button type="submit" class="w-full bg-orange-500 text-white py-2 rounded-lg transition-colors hover:bg-orange-600">
+        Apply Filters
+      </button>
+    </form>
+  </div>
+
+  <!-- Danh sách sản phẩm và Thanh tìm kiếm -->
+  <div class="w-3/4">
+
+    <!-- Thanh tìm kiếm -->
+    <div class="flex justify-center mb-12">
+      <form action="/shopping" method="GET" class="w-1/2 flex border rounded-lg overflow-hidden shadow-md">
+        <input
+          type="text"
+          name="searchQuery"
+          value="<%= searchQuery %>"
+          placeholder="Search for products..."
+          class="px-4 py-2 w-full border-none outline-none"
+          style="color: black;"
+        />
+        <button
+          type="submit"
+          class="bg-orange-500 text-white px-4 py-2 rounded-r-lg transition-colors hover:bg-orange-600"
+        >
+          Search
+        </button>
+      </form>
+    </div>
+
+    <!-- Danh mục sản phẩm -->
+    <div class="flex gap-5 items-center justify-center px-4 mb-6">
+      <% [men, women, kid].forEach((img, index) => { %>
+        <img
+          src="<%= img %>"
+          alt="product-type-<%= index %>"
+          class="product-type h-32 w-32 rounded-full border-4 border-gray-300 transition-transform transform hover:scale-125"
+        />
+      <% }) %>
+    </div>
+
+    <!-- Danh sách sản phẩm -->
+<div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <% if (filteredData.length === 0) { %>
+        <p class="text-center text-gray-500 col-span-full">
+          No products found.
+        </p>
+      <% } else { %>
+        <% filteredData.forEach((product) => { %>
+          <div class="flex flex-col p-5 bg-[#1e2c41e8] rounded-lg shadow-lg hover:shadow-2xl transition-shadow transform hover:-translate-y-1">
+            <img src="<%= product.img %>" alt="<%= product.name %>" class="max-h-[300px] rounded-lg object-cover mb-4 w-32 h-32"/>
+            <div class="flex flex-col gap-2">
+              <h3 class="text-xl font-semibold text-white"><%= product.name %></h3>
+              <p class="text-sm text-gray-400"><%= product.gender %></p>
+              <p class="text-lg font-bold text-orange-400">$<%= product.price %> USD</p>
+              <button
+                onclick="window.location.href='/product-details/<%= product._id %>'"
+                class="mt-3 py-2 bg-orange-500 text-white font-medium rounded-lg transition-colors hover:bg-orange-600"
+              >
+                View Product
+              </button>
+            </div>
+          </div>
+        <% }); %>
+      <% } %>
+    </div>
+  </div>
+</section>
